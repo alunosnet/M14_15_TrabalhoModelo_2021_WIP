@@ -20,6 +20,7 @@ namespace M14_15_TrabalhoModelo_2021_WIP
     /// </summary>
     public partial class MainWindow : Window
     {
+        BaseDados bd = new BaseDados();
         public MainWindow()
         {
             InitializeComponent();
