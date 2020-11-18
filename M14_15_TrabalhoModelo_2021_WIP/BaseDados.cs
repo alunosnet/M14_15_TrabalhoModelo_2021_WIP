@@ -80,14 +80,14 @@ namespace M14_15_TrabalhoModelo_2021_WIP
             ligacaoBD.Close();
         }
         #region SQL
-        private void executaSQL(string strSQL)
+        public void executaSQL(string strSQL)
         {
             SqlCommand comando = new SqlCommand(strSQL, ligacaoBD);
             comando.ExecuteNonQuery();
             comando.Dispose();
             comando = null;
         }
-        private void executaSQL(string strSQL, List<SqlParameter> parametros)
+        public void executaSQL(string strSQL, List<SqlParameter> parametros)
         {
             SqlCommand comando = new SqlCommand(strSQL, ligacaoBD);
             comando.Parameters.AddRange(parametros.ToArray());
@@ -95,7 +95,7 @@ namespace M14_15_TrabalhoModelo_2021_WIP
             comando.Dispose();
             comando = null;
         }
-        private void executaSQL(string strSQL, List<SqlParameter> parametros,SqlTransaction transacao)
+        public void executaSQL(string strSQL, List<SqlParameter> parametros,SqlTransaction transacao)
         {
             SqlCommand comando = new SqlCommand(strSQL, ligacaoBD);
             comando.Parameters.AddRange(parametros.ToArray());
@@ -104,7 +104,7 @@ namespace M14_15_TrabalhoModelo_2021_WIP
             comando.Dispose();
             comando = null;
         }
-        private int executaEDeolveSQL(string strSQL, List<SqlParameter> parametros)
+        public int executaEDeolveSQL(string strSQL, List<SqlParameter> parametros)
         {
             SqlCommand comando = new SqlCommand(strSQL, ligacaoBD);
             comando.Parameters.AddRange(parametros.ToArray());
@@ -113,7 +113,7 @@ namespace M14_15_TrabalhoModelo_2021_WIP
             comando = null;
             return id;
         }
-        private DataTable devolveSQL(string strSQL)
+        public DataTable devolveSQL(string strSQL)
         {
             SqlCommand comando = new SqlCommand(strSQL, ligacaoBD);
             DataTable dados = new DataTable();
@@ -125,7 +125,7 @@ namespace M14_15_TrabalhoModelo_2021_WIP
             comando = null;
             return dados;
         }
-        private DataTable devolveSQL(string strSQL,List<SqlParameter> parametros)
+        public DataTable devolveSQL(string strSQL,List<SqlParameter> parametros)
         {
             SqlCommand comando = new SqlCommand(strSQL, ligacaoBD);
             DataTable dados = new DataTable();
@@ -138,7 +138,7 @@ namespace M14_15_TrabalhoModelo_2021_WIP
             comando = null;
             return dados;
         }
-        private DataTable devolveSQL(string strSQL, List<SqlParameter> parametros,SqlTransaction transacao)
+        public DataTable devolveSQL(string strSQL, List<SqlParameter> parametros,SqlTransaction transacao)
         {
             SqlCommand comando = new SqlCommand(strSQL, ligacaoBD);
             DataTable dados = new DataTable();

@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Leitores\" />
-    <Folder Include="Livros\" />
     <Folder Include="Emprestimos\" />
   </ItemGroup>
 

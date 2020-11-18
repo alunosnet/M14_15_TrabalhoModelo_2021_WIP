@@ -25,5 +25,15 @@ namespace M14_15_TrabalhoModelo_2021_WIP
         {
             InitializeComponent();
         }
+
+        private void Menu_Sair_Click(object sender, RoutedEventArgs e)
+        {
+            App.Current.Shutdown();
+        }
+
+        private void Menu_Livros_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

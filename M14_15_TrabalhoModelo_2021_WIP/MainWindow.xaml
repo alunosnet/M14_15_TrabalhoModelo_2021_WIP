@@ -6,5 +6,10 @@
         xmlns:local="clr-namespace:M14_15_TrabalhoModelo_2021_WIP"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid/>
+    <Grid>
+        <Menu>
+            <MenuItem Header="Sair" Name="Menu_Sair" Click="Menu_Sair_Click"/>
+            <MenuItem Header="Livros" Name="Menu_Livros" Click="Menu_Livros_Click"/>
+        </Menu>
+    </Grid>
 </Window>
