@@ -8,7 +8,7 @@ using System.Text;
 
 namespace M14_15_TrabalhoModelo_2021_WIP
 {
-    class BaseDados
+    public class BaseDados
     {
         string BDName = "M14_15_TrabalhModelo_2021";
         string caminho;

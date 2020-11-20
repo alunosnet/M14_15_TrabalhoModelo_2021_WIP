@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 
@@ -7,8 +8,6 @@ namespace M14_15_TrabalhoModelo_2021_WIP.Livros
 {
     class Livro
     {
-
-
         public int nlivro { get; set; }
         public string nome { get; set; }
         public int ano { get; set; }
@@ -78,18 +77,43 @@ namespace M14_15_TrabalhoModelo_2021_WIP.Livros
             bd.executaSQL(sql, parametros);
         }
         //remover
+        public static void Remover(BaseDados bd,int id)
+        {
+            string sql = "DELETE FROM Livros WHERE nlivro=" + id;
+            bd.executaSQL(sql);
+        }
+        //TODO:atualizar
 
-        //atualizar
-
-        //get
+        //TODO:get
 
         //listar todos
+        public static List<Livro> ListaTodosLivros(BaseDados bd,bool ordenar=false)
+        {
+            string sql = "SELECT * FROM Livros";
+            if (ordenar)
+                sql += " ORDER BY nome";
 
-        //listar disponíveis
+            DataTable dados=bd.devolveSQL(sql);
+            List<Livro> lista = new List<Livro>();
+            foreach(DataRow linha in dados.Rows)
+            {
+                int nlivro = int.Parse(linha["nlivro"].ToString());
+                string nome = linha["nome"].ToString();
+                int ano = int.Parse(linha["ano"].ToString());
+                DateTime data = DateTime.Parse(linha["data_aquisicao"].ToString());
+                decimal preco = Decimal.Parse(linha["preco"].ToString());
+                string capa = linha["capa"].ToString();
+                bool estado = bool.Parse(linha["estado"].ToString());
+                Livro novo = new Livro(nlivro,nome,ano,data,preco,capa,estado);
+                lista.Add(novo);
+            }
+            return lista;
+        }
+        //TODO:listar disponíveis
 
-        //pesquisar por nome
+        //TODO:pesquisar por nome
 
-        //tostring
+        //TODO:tostring
 
     }
 }

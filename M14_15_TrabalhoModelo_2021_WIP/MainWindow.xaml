@@ -10,6 +10,7 @@
         <Menu>
             <MenuItem Header="Sair" Name="Menu_Sair" Click="Menu_Sair_Click"/>
             <MenuItem Header="Livros" Name="Menu_Livros" Click="Menu_Livros_Click"/>
+            <MenuItem Header="Leitores" Name="Menu_Leitores" Click="Menu_Leitores_Click"/>
         </Menu>
     </Grid>
 </Window>

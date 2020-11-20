@@ -1,4 +1,6 @@
-﻿using System;
+﻿using M14_15_TrabalhoModelo_2021_WIP.Leitores;
+using M14_15_TrabalhoModelo_2021_WIP.Livros;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,7 +35,14 @@ namespace M14_15_TrabalhoModelo_2021_WIP
 
         private void Menu_Livros_Click(object sender, RoutedEventArgs e)
         {
+            j_livros j = new j_livros(bd);
+            j.Show();
+        }
 
+        private void Menu_Leitores_Click(object sender, RoutedEventArgs e)
+        {
+            j_leitores j = new j_leitores(bd);
+            j.Show();
         }
     }
 }

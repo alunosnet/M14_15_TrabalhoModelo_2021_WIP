@@ -12,13 +12,15 @@
         <Label Content="Ano" HorizontalAlignment="Left" Margin="50,113,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="tbAno" HorizontalAlignment="Left" Margin="146,113,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Content="Data" HorizontalAlignment="Left" Margin="50,162,0,0" VerticalAlignment="Top"/>
-        <DatePicker HorizontalAlignment="Left" Margin="146,162,0,0" VerticalAlignment="Top" Width="120"/>
+        <DatePicker Name="DPData" HorizontalAlignment="Left" Margin="146,162,0,0" VerticalAlignment="Top" Width="120"/>
         <Label Content="Preço" HorizontalAlignment="Left" Margin="50,217,0,0" VerticalAlignment="Top"/>
         <Label Content="Capa" HorizontalAlignment="Left" Margin="50,262,0,0" VerticalAlignment="Top"/>
-        <Image HorizontalAlignment="Left" Height="100" Margin="129,275,0,0" VerticalAlignment="Top" Width="100"/>
-        <Button Content="..." HorizontalAlignment="Left" Margin="50,409,0,0" VerticalAlignment="Top" Width="79"/>
-        <Button Content="Adicionar" HorizontalAlignment="Left" Margin="194,404,0,0" VerticalAlignment="Top" Width="90"/>
+        <Image x:Name="ImgCapa" HorizontalAlignment="Left" Height="100" Margin="129,275,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button Content="..." HorizontalAlignment="Left" Margin="40,310,0,0" VerticalAlignment="Top" Width="50" Click="Button_Click_1"/>
+        <Button Content="Adicionar" HorizontalAlignment="Left" Margin="340,363,0,0" VerticalAlignment="Top" Width="90" Height="30" Click="Button_Click"/>
+        <Button Content="Remover" HorizontalAlignment="Left" Margin="474,363,0,0" VerticalAlignment="Top" Width="90" Height="30" Click="Button_Click_2"/>
         <TextBox x:Name="tbPreco" HorizontalAlignment="Left" Margin="146,221,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <DataGrid Name="DGLivros" Height="300" Margin="340,51,0,0" HorizontalAlignment="Left" Width="400" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
