@@ -22,8 +22,8 @@ namespace M14_15_TrabalhoModelo_2021_WIP.Livros
         BaseDados bd;
         public j_livros(BaseDados bd)
         {
-            InitializeComponent();
             this.bd = bd;
+            InitializeComponent();
             AtualizaGrid();
         }
         //adicionar
@@ -75,11 +75,13 @@ namespace M14_15_TrabalhoModelo_2021_WIP.Livros
         private void LimparForm()
         {
             ImgCapa.Source = null;
-            ImgCapa.Tag = "";
+            ImgCapa.Tag = null;
             tbNome.Text = "";
             tbAno.Text = "";
             tbPreco.Text = "";
-            
+            DGLivros.SelectedItem = null;
+            btAtualizar.Visibility = Visibility.Hidden;
+            btRemover.Visibility = Visibility.Hidden;
         }
 
         //escolher imagem
@@ -108,8 +110,80 @@ namespace M14_15_TrabalhoModelo_2021_WIP.Livros
                 return;
             }
             Livro.Remover(bd, livro.nlivro);
+            LimparForm();
             AtualizaGrid();
         }
-        //TODO: mostrar os dados livro selecionado com o click na grid
+
+        private void DGLivros_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Livro lv = (Livro)DGLivros.SelectedItem;
+            if (lv == null) return;
+            tbNome.Text = lv.nome;
+            tbAno.Text = lv.ano.ToString();
+            tbPreco.Text = lv.preco.ToString();
+            DPData.SelectedDate = lv.data_aquisicao;
+            if (System.IO.File.Exists(lv.capa))
+            {
+                ImgCapa.Source = new BitmapImage(new Uri(lv.capa));
+
+            }
+            //mostrar o botão atualizar
+            btAtualizar.Visibility = Visibility.Visible;
+            btRemover.Visibility = Visibility.Visible;
+        }
+
+        private void DGLivros_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            DataGridTextColumn col = e.Column as DataGridTextColumn;
+            if(col!=null && e.PropertyType == typeof(DateTime))
+            {
+                if (col.Header.ToString() == "data_aquisicao")
+                    col.Binding = new Binding(e.PropertyName) { StringFormat = "dd-MM-yyyy" };
+            }
+        }
+        //limpar form
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            
+            LimparForm();
+        }
+        //atualizar livro
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            Livro lv = (Livro)DGLivros.SelectedItem;
+            if (lv == null) return;
+
+            //atualizar dados
+            lv.nome = tbNome.Text;
+            lv.ano = int.Parse(tbAno.Text);
+            lv.data_aquisicao = DPData.SelectedDate.Value;
+            if (ImgCapa.Tag !=null)
+            {
+                //TODO:tentar apagar os ficheiros das capas que
+                //já não são utilizados
+                //ImgCapa.Source = null;
+                //GC.Collect();
+                Guid guid = Guid.NewGuid();
+                string capa = Utils.pastaDoPrograma() + @"\" + guid.ToString();
+                string ficheiro = ImgCapa.Tag.ToString();
+                lv.capa = capa;
+                File.Copy(ficheiro, lv.capa, true);
+            }
+            lv.preco = Decimal.Parse(tbPreco.Text);
+
+            lv.Atualizar(bd);
+            LimparForm();
+            AtualizaGrid();
+        }
+
+        private void tbPesqusiar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            DGLivros.ItemsSource = Livro.PesquisaPorNome(bd,tbPesquisar.Text);
+        }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            Utils.printDG<Livro>(DGLivros, "Livros");
+        }
     }
 }

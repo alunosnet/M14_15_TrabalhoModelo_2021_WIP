@@ -70,5 +70,22 @@ namespace M14_15_TrabalhoModelo_2021_WIP.Leitores
                 }
             }
         }
+
+        private void cbPaginacao_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void DGLeitores_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Leitor lt = (Leitor)DGLeitores.SelectedItem;
+            if (lt == null) return;
+            tbNome.Text = lt.nome;
+            DPData.SelectedDate = lt.data_nascimento;
+            string ficheiro=Utils.pastaDoPrograma()+"@\temp.jpg";
+            Utils.VetorParaImagem(lt.fotografia, ficheiro);
+            ImgFoto.Source = new BitmapImage(new Uri(ficheiro));
+            ImgFoto.Tag = ficheiro;
+        }
     }
 }
