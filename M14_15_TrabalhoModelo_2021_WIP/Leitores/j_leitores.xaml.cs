@@ -20,16 +20,40 @@ namespace M14_15_TrabalhoModelo_2021_WIP.Leitores
     public partial class j_leitores : Window
     {
         BaseDados bd;
+        int LeitoresPorPagina = 5;
         public j_leitores(BaseDados bd)
         {
             InitializeComponent();
             this.bd = bd;
+            btAtualizar.Visibility = Visibility.Hidden;
+            btRemover.Visibility = Visibility.Hidden;
+            ContarPaginas();
+            cbPaginacao.SelectedIndex =0;
             AtualizaGrid();
         }
+        void ContarPaginas()
+        {
+            decimal npaginas=Math.Ceiling((decimal)Leitor.NrLeitores(bd)/LeitoresPorPagina);
+            cbPaginacao.Items.Clear();
+            for (int i = 1; i <= npaginas; i++)
+            {
+                cbPaginacao.Items.Add(i);
+            }
 
+        }
         private void AtualizaGrid()
         {
-            DGLeitores.ItemsSource = Leitor.ListarTodos(bd);
+            if(cbPaginacao.SelectedItem==null)
+                DGLeitores.ItemsSource = Leitor.ListarTodos(bd);
+            else
+            {
+                int p = int.Parse(cbPaginacao.SelectedItem.ToString());
+                int primeiro = (p - 1) * LeitoresPorPagina;
+                DGLeitores.ItemsSource = Leitor.ListarTodos(bd, primeiro + 1, primeiro + LeitoresPorPagina);
+
+            }
+
+            
         }
 
         //adicionar
@@ -44,13 +68,17 @@ namespace M14_15_TrabalhoModelo_2021_WIP.Leitores
 
             LimparForm();
             AtualizaGrid();
+            ContarPaginas();
         }
 
         private void LimparForm()
         {
             ImgFoto.Source = null;
+            DGLeitores.SelectedItem = null;
             ImgFoto.Tag = "";
             tbNome.Text = "";
+            btAtualizar.Visibility = Visibility.Hidden;
+            btRemover.Visibility = Visibility.Hidden;
         }
 
         //imagem
@@ -73,7 +101,7 @@ namespace M14_15_TrabalhoModelo_2021_WIP.Leitores
 
         private void cbPaginacao_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            AtualizaGrid();
         }
         
         private void DGLeitores_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -95,6 +123,36 @@ namespace M14_15_TrabalhoModelo_2021_WIP.Leitores
 
             //apagar o ficheiro temp.jpg
             File.Delete(ficheiro);
+            btRemover.Visibility = Visibility.Visible;
+            btAtualizar.Visibility = Visibility.Visible;
+        }
+        //limpar form
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            LimparForm();
+        }
+        //atualizar
+        private void btAtualizar_Click(object sender, RoutedEventArgs e)
+        {
+            Leitor lt = (Leitor)DGLeitores.SelectedItem;
+            if (lt == null) return;
+            lt.nome = tbNome.Text;
+            lt.data_nascimento = DPData.SelectedDate.Value;
+            if(ImgFoto.Tag!=null)
+                lt.fotografia= Utils.ImagemParaVetor(ImgFoto.Tag.ToString());
+            lt.Atualizar(bd);
+            LimparForm();
+            AtualizaGrid();
+        }
+        //remover
+        private void btRemover_Click(object sender, RoutedEventArgs e)
+        {
+            Leitor lt = (Leitor)DGLeitores.SelectedItem;
+            if (lt == null) return;
+            Leitor.Remover(bd,lt.nleitor);
+            LimparForm();
+            AtualizaGrid();
+            ContarPaginas();
         }
     }
 }

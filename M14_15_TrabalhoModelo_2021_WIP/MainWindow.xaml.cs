@@ -1,4 +1,5 @@
-﻿using M14_15_TrabalhoModelo_2021_WIP.Leitores;
+﻿using M14_15_TrabalhoModelo_2021_WIP.Emprestimos;
+using M14_15_TrabalhoModelo_2021_WIP.Leitores;
 using M14_15_TrabalhoModelo_2021_WIP.Livros;
 using System;
 using System.Collections.Generic;
@@ -42,6 +43,12 @@ namespace M14_15_TrabalhoModelo_2021_WIP
         private void Menu_Leitores_Click(object sender, RoutedEventArgs e)
         {
             j_leitores j = new j_leitores(bd);
+            j.Show();
+        }
+
+        private void Menu_Emprestimos_Click(object sender, RoutedEventArgs e)
+        {
+            j_emprestimos j = new j_emprestimos(bd);
             j.Show();
         }
     }

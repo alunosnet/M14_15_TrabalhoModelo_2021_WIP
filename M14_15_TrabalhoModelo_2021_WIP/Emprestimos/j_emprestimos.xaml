@@ -1,0 +1,17 @@
+﻿<Window x:Class="M14_15_TrabalhoModelo_2021_WIP.Emprestimos.j_emprestimos"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:M14_15_TrabalhoModelo_2021_WIP.Emprestimos"
+        mc:Ignorable="d"
+        Title="j_emprestimos" Height="450" Width="800">
+    <Grid>
+        <Label Content="Leitor" HorizontalAlignment="Left" Margin="116,78,0,0" VerticalAlignment="Top"/>
+        <Label Content="Livro" HorizontalAlignment="Left" Margin="116,128,0,0" VerticalAlignment="Top"/>
+        <ComboBox Name="cbLeitores" HorizontalAlignment="Left" Margin="209,80,0,0" VerticalAlignment="Top" Width="191"/>
+        <ComboBox Name="cbLivros" HorizontalAlignment="Left" Margin="214,133,0,0" VerticalAlignment="Top" Width="173"/>
+        <Button Click="Button_Click" Content="Emprestar" HorizontalAlignment="Left" Margin="243,0,0,0" VerticalAlignment="Center" Height="51" Width="115"/>
+
+    </Grid>
+</Window>

@@ -7,11 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Emprestimos\" />
+    <None Remove="group.png" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="group.png" />
   </ItemGroup>
 
 </Project>

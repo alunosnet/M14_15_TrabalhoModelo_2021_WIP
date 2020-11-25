@@ -30,6 +30,12 @@ namespace M14_15_TrabalhoModelo_2021_WIP
             ligacaoBD.Open();
             ligacaoBD.ChangeDatabase(BDName);
         }
+
+        internal SqlTransaction iniciarTransacao()
+        {
+            return ligacaoBD.BeginTransaction();
+        }
+
         ~BaseDados()
         {
             try

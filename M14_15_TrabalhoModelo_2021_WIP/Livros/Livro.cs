@@ -176,8 +176,29 @@ namespace M14_15_TrabalhoModelo_2021_WIP.Livros
             //executar
             bd.executaSQL(sql, parametros);
         }
-        //TODO:listar disponíveis
+        //listar disponíveis
+        public static List<Livro> ListaTodosLivrosComEstado(BaseDados bd,int estado, bool ordenar = false)
+        {
+            string sql = $"SELECT * FROM Livros WHERE estado={estado} ";
+            if (ordenar)
+                sql += " ORDER BY nome";
 
+            DataTable dados = bd.devolveSQL(sql);
+            List<Livro> lista = new List<Livro>();
+            foreach (DataRow linha in dados.Rows)
+            {
+                int nlivro = int.Parse(linha["nlivro"].ToString());
+                string nome = linha["nome"].ToString();
+                int ano = int.Parse(linha["ano"].ToString());
+                DateTime data = DateTime.Parse(linha["data_aquisicao"].ToString());
+                decimal preco = Decimal.Parse(linha["preco"].ToString());
+                string capa = linha["capa"].ToString();
+                bool estadolivro = bool.Parse(linha["estado"].ToString());
+                Livro novo = new Livro(nlivro, nome, ano, data, preco, capa, estadolivro);
+                lista.Add(novo);
+            }
+            return lista;
+        }
         //TODO:pesquisar por nome
         public static List<Livro> PesquisaPorNome(BaseDados bd,string nomePesquisar)
         {
@@ -207,7 +228,10 @@ namespace M14_15_TrabalhoModelo_2021_WIP.Livros
             }
             return lista;
         }
-        //TODO:tostring
+        public override string ToString()
+        {
+            return nome;
+        }
 
     }
 }
