@@ -75,17 +75,26 @@ namespace M14_15_TrabalhoModelo_2021_WIP.Leitores
         {
 
         }
-
+        
         private void DGLeitores_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Leitor lt = (Leitor)DGLeitores.SelectedItem;
             if (lt == null) return;
             tbNome.Text = lt.nome;
             DPData.SelectedDate = lt.data_nascimento;
-            string ficheiro=Utils.pastaDoPrograma()+"@\temp.jpg";
+            string ficheiro=Utils.pastaDoPrograma()+@"\temp.jpg";
             Utils.VetorParaImagem(lt.fotografia, ficheiro);
-            ImgFoto.Source = new BitmapImage(new Uri(ficheiro));
-            ImgFoto.Tag = ficheiro;
+            //Corrigir o problema do lock ao ficheiro
+            BitmapImage img = new BitmapImage();
+            img.BeginInit();
+            img.CacheOption = BitmapCacheOption.OnLoad;
+            img.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+            img.UriSource = new Uri(ficheiro);
+            img.EndInit();
+            ImgFoto.Source = img;
+
+            //apagar o ficheiro temp.jpg
+            File.Delete(ficheiro);
         }
     }
 }

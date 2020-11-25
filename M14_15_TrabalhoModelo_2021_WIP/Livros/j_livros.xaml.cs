@@ -124,8 +124,20 @@ namespace M14_15_TrabalhoModelo_2021_WIP.Livros
             DPData.SelectedDate = lv.data_aquisicao;
             if (System.IO.File.Exists(lv.capa))
             {
-                ImgCapa.Source = new BitmapImage(new Uri(lv.capa));
+                //TODO:Corrigir o problema do lock ao ficheiro da capa
+                BitmapImage img = new BitmapImage();
+                img.BeginInit();
+                img.CacheOption = BitmapCacheOption.OnLoad;
+                img.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                img.UriSource = new Uri(lv.capa);
+                img.EndInit();
 
+                ImgCapa.Source = img;
+
+            }
+            else
+            {
+                ImgCapa.Source = null;
             }
             //mostrar o botão atualizar
             btAtualizar.Visibility = Visibility.Visible;
@@ -163,10 +175,10 @@ namespace M14_15_TrabalhoModelo_2021_WIP.Livros
                 //já não são utilizados
                 //ImgCapa.Source = null;
                 //GC.Collect();
-                Guid guid = Guid.NewGuid();
-                string capa = Utils.pastaDoPrograma() + @"\" + guid.ToString();
+                //Guid guid = Guid.NewGuid();
+                //string capa = Utils.pastaDoPrograma() + @"\" + guid.ToString();
                 string ficheiro = ImgCapa.Tag.ToString();
-                lv.capa = capa;
+                //lv.capa = capa;
                 File.Copy(ficheiro, lv.capa, true);
             }
             lv.preco = Decimal.Parse(tbPreco.Text);
