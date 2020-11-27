@@ -104,7 +104,8 @@ namespace M14_15_TrabalhoModelo_2021_WIP
         public void executaSQL(string strSQL, List<SqlParameter> parametros,SqlTransaction transacao)
         {
             SqlCommand comando = new SqlCommand(strSQL, ligacaoBD);
-            comando.Parameters.AddRange(parametros.ToArray());
+            if(parametros!=null)
+                comando.Parameters.AddRange(parametros.ToArray());
             comando.Transaction = transacao;
             comando.ExecuteNonQuery();
             comando.Dispose();
