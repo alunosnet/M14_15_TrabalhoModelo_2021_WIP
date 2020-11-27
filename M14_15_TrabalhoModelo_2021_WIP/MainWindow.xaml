@@ -19,6 +19,11 @@
                     <Image Source="/group.png" />
                 </StackPanel>
             </Button>
+            <ComboBox SelectionChanged="ComboBox_SelectionChanged">
+                <ComboBoxItem Content="Consulta 1" />
+                <ComboBoxItem Content="Consulta 2" />
+            </ComboBox>
         </ToolBar>
+        <DataGrid AutoGenerateColumns="True" ItemsSource="{Binding}" Name="DGConsultas" Margin="0,70,0,0" />
     </Grid>
 </Window>
