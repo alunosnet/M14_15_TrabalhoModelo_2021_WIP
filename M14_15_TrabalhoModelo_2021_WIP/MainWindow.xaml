@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:M14_15_TrabalhoModelo_2021_WIP"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Closing="Window_Closing">
     <Grid>
         <Menu>
             <MenuItem Header="Sair" Name="Menu_Sair" Click="Menu_Sair_Click"/>
@@ -19,9 +19,21 @@
                     <Image Source="/group.png" />
                 </StackPanel>
             </Button>
-            <ComboBox SelectionChanged="ComboBox_SelectionChanged">
+            <ComboBox Name="cbConsultas" SelectionChanged="ComboBox_SelectionChanged">
                 <ComboBoxItem Content="Consulta 1" />
                 <ComboBoxItem Content="Consulta 2" />
+                <ComboBoxItem Content="Consulta 3" />
+                <ComboBoxItem Content="Consulta 4" />
+                <ComboBoxItem Content="Consulta 5" />
+                <ComboBoxItem Content="Consulta 6" />
+                <ComboBoxItem Content="Consulta 7" />
+                <ComboBoxItem Content="Consulta 8" />
+                <ComboBoxItem Content="Consulta 9" />
+                <ComboBoxItem Content="Consulta 10" />
+                <ComboBoxItem Content="Consulta 11" />
+                <ComboBoxItem Content="Consulta 12" />
+                <ComboBoxItem Content="Consulta 13" />
+                <ComboBoxItem Content="Consulta 14" />
             </ComboBox>
         </ToolBar>
         <DataGrid AutoGenerateColumns="True" ItemsSource="{Binding}" Name="DGConsultas" Margin="0,70,0,0" />
