@@ -197,5 +197,10 @@ namespace M14_15_TrabalhoModelo_2021_WIP.Livros
         {
             Utils.printDG<Livro>(DGLivros, "Livros");
         }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            Utils.printDG<Livro>(DGLivros, "Livros");
+        }
     }
 }
